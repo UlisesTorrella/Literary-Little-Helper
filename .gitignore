@@ -3,7 +3,7 @@
 corpus/*
 read.py
 *__pycache__
-*.pyc
+*.pyc1
 Spanish/*
 /corpus/
 /Spanish/
