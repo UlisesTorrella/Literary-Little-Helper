@@ -1,0 +1,8 @@
+.idea
+investigation
+corpus/spanish
+corpus/english
+read.py
+*__pycache__
+*.pyc
+Spanish/
