@@ -2,12 +2,11 @@
 """Train an AddOne model and pickle saves it in -d
 
 Usage:
-  train_model.py -n name -d directory -c corpus
+  train_model.py -d directory -c corpus
   train_model.py -h | --help
 
 Options:
   -c <file>     Corpus location
-  -n <file>     Name of the training corpus
   -d <file>     Directory for trained data
   -h --help     Show this screen.
 """
@@ -21,7 +20,7 @@ from model.ngram import NGram, InterpolatedNGram, AddOneNGram
 if __name__ == '__main__':
     opts = docopt(__doc__)
     corpus_directory = opts['-c']
-    location = opts['-d'] + opts['-n'] + '.'
+    location = opts['-d']
 
     corpus = PlaintextCorpusReader(corpus_directory, '.*\.txt', sent_tokenizer=LazyLoader('tokenizers/punkt/spanish.pickle'), encoding="utf8")
     sents = corpus.sents()

@@ -5,7 +5,7 @@ from model.grammar import Grammar
 from model.symbol import Symbol
 import random
 
-f = open("Spanish/spanish.grammar", 'rb')
+f = open("Spanish/grammar", 'rb')
 grammar = pickle.load(f)
 f.close()
 

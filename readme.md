@@ -53,11 +53,10 @@ derroteros jubilable \
 pasadizos repartía \
 demasiado Admirable
 
-
->entre todo confecciona holandeses \
->entraba alimentamos apartemos \
->aligeramiento en acercásemos \
->considerando , hondamente Bebamos
+>ornitorrincos desvinculado\
+ánimo conmovedoramente \
+la mitología a Tolstoy\
+cardenal Retrospectivamente
 
 >invertido, No tristemente ejemplar \
 ahí quiero pensar condescendencia \
@@ -70,14 +69,13 @@ la felicidad pertenece tomado al costes \
 la cerca están indiferente al oscurecer
 
 ##Gibberish Sentences:
->tercer , bueno , tal al frío terrón de clasificación que había la noche , que Jeremías Aureliano Buendía no cuando logró con el barrio de una ceremonia entera no es toda cosa que un frasco grande que la tierra .
+>Cuando los vegetales entendieron , la muchacha alzó con un modo de bailarina .
 
 >Los terrores fueron con ocasión minutos , como recién ahora fueron arrobadores . 
 
 >aunque su hijo acaba , y el ensayo de nuestros deseos y con temor de su tesoro , muy echará ella esperando . 
 
->cuándo y absolutamente hubieron atado la mesa de comer haya de bailar , Telémaco y que incluso aman de Néstor engancharon los ojos , llenaron al muerto rey y que parecieron a quien trato y el pecho caliente . 
-
+>entre todo confecciona holandeses 
 ## Tokenization
 The tokenization system is simple, but exhaustive.
 It must contain a tokenize() method that give a word returns its syntactic meaning, also it must be a suryective function. (In the spanish tokenizer I consider unknown words as unique tokens)

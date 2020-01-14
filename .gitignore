@@ -1,8 +1,10 @@
-.idea
-investigation
-corpus/spanish
-corpus/english
+.idea/*
+/investigation/*
+corpus/*
 read.py
 *__pycache__
 *.pyc
-Spanish/
+Spanish/*
+/corpus/
+/Spanish/
+/Spanish/*

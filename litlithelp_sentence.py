@@ -1,13 +1,12 @@
 """Generate Gibberish
 
 Usage:
-  litlithelp_sentence.py -d directory -n name -s sentences
+  litlithelp_sentence.py -d directory -n times
   litlithelp_sentence.py -h | --help
 
 Options:
   -d <directory> where is the trained data
-  -n <name>      trained data set name
-  -s <sentences> how many
+  -n <times>      how many
   -h --help      Show this screen.
 """
 from docopt import docopt
@@ -24,9 +23,8 @@ def title(n):
 if __name__ == "__main__":
     opts = docopt(__doc__)
     assert (isinstance(opts['-d'], type('')))
-    assert (isinstance(opts['-n'], type('')))
 
-    location = opts['-d'] + opts['-n'] + '.'
+    location = opts['-d']
     # Pick up the trained model
     f = open(location + "model", 'rb')
     spanish_model = pickle.load(f)
@@ -46,4 +44,4 @@ if __name__ == "__main__":
 
     generator = GrammarSensitiveGenerator(spanish_model, spanish_grammar, spanish_tokens)
 
-    title(int(opts['-s']))
+    title(int(opts['-n']))

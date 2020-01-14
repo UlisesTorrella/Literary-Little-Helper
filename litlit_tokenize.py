@@ -4,11 +4,10 @@
     Todo: Make it possible to choose different tokenizers
 
 Usage:
-  litlit_tokenize.py -n name -d directory
+  litlit_tokenize.py -d directory
   litlit_tokenize.py -h | --help
 
 Options:
-  -n <file>     Name of the training corpus
   -d <file>     Directory for trained data
   -h --help     Show this screen.
 """
@@ -19,7 +18,7 @@ import pickle
 
 if __name__ == '__main__':
     opts = docopt(__doc__)
-    location = opts['-d'] + opts['-n'] + '.'
+    location = opts['-d']
 
     f = open(location + "model", 'rb')
     model = pickle.load(f)

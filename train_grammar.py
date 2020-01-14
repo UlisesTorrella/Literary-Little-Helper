@@ -3,12 +3,11 @@
 Uses tokenization in -d
 
 Usage:
-  train_grammar.py -n name -d directory -c corpus
+  train_grammar.py -d directory -c corpus
   train_grammar.py -h | --help
 
 Options:
   -c <file>     Corpus location
-  -n <file>     Name of the training corpus
   -d <file>     Directory for trained data
   -h --help     Show this screen.
 """
@@ -24,7 +23,7 @@ if __name__ == '__main__':
     print("TRAIN GRAMMAR: ")
     # Get the corpus
     corpus = opts['-c']
-    location = opts['-d'] + opts['-n'] + '.'
+    location = opts['-d']
 
     print("getting corpus from: " + corpus)
     model = PlaintextCorpusReader(corpus, '.*\.txt', sent_tokenizer=LazyLoader('tokenizers/punkt/spanish.pickle'), encoding="utf8")
