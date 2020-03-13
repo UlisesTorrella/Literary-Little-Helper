@@ -1,12 +1,15 @@
+
+
 class Production(object):
     # here alpha and beta must be a list of symbols, N a non terminal
     # and right another list of symbols
     def __init__(self, N, right, alpha=[], beta=[]):
-        assert(not N.terminal)
+        assert (not N.terminal)
         self.alpha = [] + alpha
         self.N = N
         self.beta = [] + beta
         self.right = right
+
     def __hash__(self):
         return hash(str(self))
 
@@ -28,23 +31,23 @@ class Production(object):
     def is_valid(self, alpha, N, beta):
         if self.N != N:
             return False
-        validAlpha= False
+        validAlpha = False
         validBeta = False
-        if len(self.alpha)>len(alpha):
+        if len(self.alpha) > len(alpha):
             return False
         else:
-            if len(alpha)>len(self.alpha):
-                if(alpha[len(alpha) - len(self.alpha):] == self.alpha):
+            if len(alpha) > len(self.alpha):
+                if alpha[len(alpha) - len(self.alpha):] == self.alpha:
                     validAlpha = True
             else:
                 if self.alpha == alpha:
                     validAlpha = True
 
-        if len(self.beta)>len(beta):
+        if len(self.beta) > len(beta):
             return False
         else:
-            if len(beta)>len(self.beta):
-                if(beta[:len(self.beta)] == self.beta):
+            if len(beta) > len(self.beta):
+                if beta[:len(self.beta)] == self.beta:
                     validBeta = True
             else:
                 if self.beta == beta:
@@ -52,8 +55,8 @@ class Production(object):
 
         return validAlpha and validBeta
 
-#    def degenerate(self, symbols):
-        #TODO
+        #    def degenerate(self, symbols):
+        # TODO
 
 
 class Grammar(object):
@@ -61,8 +64,8 @@ class Grammar(object):
     # nonterminal and terminal are sets containing Symbols
     # start must be in nonterminals
     def __init__(self, nonterminal, terminal, start):
-        assert(start in nonterminal)
-        assert((not n.terminal)for n in nonterminal)
+        assert (start in nonterminal)
+        assert ((not n.terminal) for n in nonterminal)
         self.N = nonterminal
         self.T = terminal
         # we have dictionary of production to optimize searches
@@ -116,3 +119,8 @@ class Grammar(object):
             if production.right == symbols:
                 result.append(production)
         return result
+
+    def is_grammatically_correct(self, symbols):
+        # TODO , I don't know how to go to do it without going throw every possible production,
+        #  and optimizing that algorithm.
+        return False

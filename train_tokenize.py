@@ -4,8 +4,8 @@
     Todo: Make it possible to choose different tokenizers
 
 Usage:
-  litlit_tokenize.py -d directory
-  litlit_tokenize.py -h | --help
+  train_tokenize.py -d directory
+  train_tokenize.py -h | --help
 
 Options:
   -d <file>     Directory for trained data

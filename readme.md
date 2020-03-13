@@ -1,25 +1,32 @@
 # Literary Little Helper
-The main idea of this tiny project is to generate grammatically correct 
+The main idea of this tiny project is to generate grammatically correct meaningless
 natural language. 
 
 It's a literary helper in hopes to throw bits of inspiration to a stuck author. It 
 feeds on the authors chosen texts, in my case lots of spanish written books, and makes small
 meaningless poems and phrases.
 
-From any corpus, given proper tokenization. It should generate
+From any corpus, given proper tokenization (here only the spanish tokenization is implemented). It should generate
 it's own inference rules to form a Context Sensitive grammar.
 
 # Generating / Usage
 This is the goal of this project. We can randomly generate grammatically correct sentences and verses. 
 
-Build a model:
+Train a model:
 > train_model.py -n name -d directory -c corpus\
 
 Tokenize (it might take a while, depends on the tokenizer):
-> litlit_tokenize.py -n name -d directory \
+> train_tokenize.py -n name -d directory \
 
-Define a context sensitive grammar:
+Define a context sensitive grammar: (it doesnt use the entire corpus, just a small fraction)
 > train_grammar.py -n name -d directory -c corpus \
+
+# Uses:
+python 3
+nltk
+pickle
+docopt
+PIL for the publish.py thing
 
 Generate:
 
@@ -27,26 +34,26 @@ For spanish:
 
 Poems:
 
-    litlithelp_spanish_poem.py -s syllables -r rhyme -d directory -n name \    
-    Options: \
-      -r <rhyme>     asonante, consonante \
-      -s <syllables> syllables (int) \
-      -d <directory> where the trained data is\
-      -n <name>      trained data set name
+    litlithelp_stanza.py -s syllables -r rhyme -d directory \
+    Options:
+      -r <type_of_rhyme>     asonante, consonante
+      -s <syllables> syllables for each verse
+      -d <directory> where is the trained data
+      -h --help      Show this screen.
+
 
 If the corpus is too small, or the tokenization it's not correct, it wont be able to 
 produce verses and rhymes. In that case shows "no pude"
 
-Sentences:
+There is also a publish.py feature, that generates an image to pretend to be a quoted fragment of a poem
 
+Sentences:
    
-      litlithelp_sentence.py -d directory -n name -s sentences
-    
+      litlithelp_sentence.py -d directory -n times
     Options:
       -d <directory> where is the trained data
-      -n <name>      trained data set name
-      -s <sentences> how many
-      -h --help      Show this screen.
+      -n <times>      how many
+
 ##Gibberish Poems:
 >epílogo kaminando \
 derroteros jubilable \

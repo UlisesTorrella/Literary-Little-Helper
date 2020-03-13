@@ -1,11 +1,11 @@
 """Generate Gibberish
 
 Usage:
-  litlithelp_stanza.py -s syllables -r rhyme -d directory
+  litlithelp_stanza.py -s syllables -r type_of_rhyme -d directory
   litlithelp_stanza.py -h | --help
 
 Options:
-  -r <rhyme>     asonante, consonante
+  -r <type_of_rhyme>     asonante, consonante
   -s <syllables> syllables for each verse
   -d <directory> where is the trained data
   -h --help      Show this screen.
@@ -15,49 +15,57 @@ import pickle
 from model.generator import GrammarSensitiveGenerator
 
 
-def consonante(s):
+def consonante(s, generator):
     first_verse = generator.generate_verse(syllables=s, attempts=1000)
     if first_verse == -1:
         print("no pude")
         return -1
     print(first_verse)
+    r = first_verse
     second_verse = generator.generate_verse(syllables=s, attempts=1000)
     if second_verse == -1:
         print("no pude")
         return -1
     print(second_verse)
+    r += "\n" + second_verse
     third_verse = generator.generate_verse(syllables=s, attempts=1000)
     if third_verse == -1:
         print("no pude")
         return -1
     print(third_verse)
-    forth_verse = generator.generate_verse(syllables=s, attempts=1000, rhyme=".*" + second_verse[-3:] + "$")
+    r += "\n" + third_verse
+    forth_verse = generator.generate_verse(syllables=s, attempts=100, rhyme=".*" + second_verse[-3:] + "$")
     if forth_verse == -1:
         print("no pude")
         return -1
     print(forth_verse)
+    r += "\n" + forth_verse
+    return r
 
 
 vowels = {'a', 'e', 'i', 'o', 'u', 'á', 'é', 'í', 'ó', 'ú',
           'A', 'E', 'I', 'O', 'U', 'Á', 'É', 'Í', 'Ó', 'Ú'}
 
 
-def asonante(s):
+def asonante(s, generator):
     first_verse = generator.generate_verse(syllables=s, attempts=1000)
     if first_verse == -1:
         print("no pude")
         return -1
     print(first_verse)
+    r = first_verse
     second_verse = generator.generate_verse(syllables=s, attempts=1000)
     if second_verse == -1:
         print("no pude")
         return -1
     print(second_verse)
+    r += "\n" + second_verse
     third_verse = generator.generate_verse(syllables=s, attempts=1000)
     if third_verse == -1:
         print("no pude")
         return -1
     print(third_verse)
+    r += "\n" + third_verse
     forth_verse = generator.generate_verse(syllables=s, attempts=1000,
                                            rhyme=".*" + '[^aeiouAEIOUáéíóúÁÉÍÓÚ]'.join([q if q in vowels else ''
                                                                                         for q in second_verse]
@@ -66,6 +74,8 @@ def asonante(s):
         print("no pude")
         return -1
     print(forth_verse)
+    r += "\n" + forth_verse
+    return r
 
 
 if __name__ == "__main__":
@@ -94,6 +104,6 @@ if __name__ == "__main__":
 
     syllables = int(opts['-s'])
     if opts['-r'] == "asonante":
-        asonante(syllables)
+        asonante(syllables, generator)
     elif opts['-r'] == "consonante":
-        consonante(syllables)
+        consonante(syllables, generator)

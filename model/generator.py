@@ -47,7 +47,9 @@ class GrammarSensitiveGenerator(object):
                 self._sorted_probs[tok][key] = sorted(value.items(), key=operator.itemgetter(1), reverse=True)
 
     def generate_sent(self):
-        """Randomly generate a sentence."""
+        """Randomly generate a sentence.
+        returns string
+        """
         n = self._n
         s = self.grammar.get_start()
         grammar = self.grammar
@@ -101,21 +103,39 @@ class GrammarSensitiveGenerator(object):
         n = self._n
         s = self.grammar.get_start()
         grammar = self.grammar
+        # as many attempts as we are allowed (attempts as words that rhyme that we will try to put in a sentence with
+        # given amount of syllables
         for _ in xrange(attempts):
+            # get me any word that rhymes and it will be the last
             word = self.get_word_that_matches(rhyme)
-            token = self.tokens[self.get_word_that_matches(rhyme)]
+            # what's its token?
+            token = self.tokens[word]
+            # estimate the amount of words we will need to match the required syllables
             w = ceil(syllables/get_mean_syllable(self.model))
+            # around that much of words we will generate (it's clumsy)
+            # we need to do this to choose how deep into our grammar to look for the token we have, the token can be
+            # anywhere, it's useless to look for it in depth 1 given that the words has less than x syllables
+            #### in case of i=4 we will try sentences of lenght 3, 4, 5 and 6
             for i in range(w-1, w+2):
+                # we get a list of all the possible productions that get will us to 'word''s token, given it's context
+                # [token] means we are looking for producctions that return only token, and no NonTerminals
+                # grammar.non_terminals_hierarchy[i] comes as "the nonterminal for i depth"
                 possibilities = grammar.get_possible_produced([token], grammar.non_terminals_hierarchy[i])
                 if not possibilities:
+                    # if it's empty then we have a token that can't be the last one
                     break
+                # any of those productions, we pick it's context alpha, as we ignore beta in this program. [:-1] because
+                # we already have that one
                 sentence_tokens = random.choice(possibilities).alpha[:-1]
                 patience = persistence
+                # let's match token to word, attempting to satisfy the syllables condition.
+                # until we lose our patience as a poet
                 while patience > 0:
                     sentence = ["<s>"]
                     for token in sentence_tokens:
                         sentence.append(self.generate_word(tuple(sentence[i:i + n - 1]), token))
                     sentence.append(word)
+                    # does it comply with the requested sentences?
                     if how_many_syllables_sent(' '.join(sentence[1:])) != syllables:
                         patience -= 1
                     else:
